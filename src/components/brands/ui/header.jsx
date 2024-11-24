@@ -13,11 +13,11 @@ export default function HeaderBrand({ next, prev }) {
           Популярные бренды
         </h2>
       </div>
-      <divs className="w-1/4 flex items-center">
+      <div className="w-1/4 flex items-center">
         <button onClick={next} className='bg-[#D9D9D9] rounded-lg flex justify-center items-center py-2 px-10 h-fit ml-5'>
           <Image src={"next_rules.svg"} alt="" width="20" height="20" />
         </button>
-      </divs>
+      </div>
     </div>
   );
 }

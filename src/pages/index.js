@@ -1,6 +1,8 @@
+import Advanced from '@/components/advanced';
 import Brands from '@/components/brands';
 import Cataloge from '@/components/cataloge';
 import FirstView from '@/components/firstview';
+import FormPage from '@/components/forms_page';
 import HeaderMenu from '@/components/header';
 import PageLayout from '@/components/layout/page';
 import { useState } from 'react';
@@ -14,6 +16,9 @@ export default function Home() {
       <FirstView changeModal={changeState}/>
       <Cataloge changeModal={changeState}/>
       <Brands />
+      <Advanced />
+      <FormPage />
     </PageLayout>   
   );
 }
+// Осталось потом модалочки подключить 

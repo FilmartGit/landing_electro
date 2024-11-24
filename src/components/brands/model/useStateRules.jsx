@@ -1,11 +1,12 @@
 import { useState } from "react";
 
 export default function useStateRules(maxSlide) {
+
   const [stateSlide, setStateSlide] = useState(0);
 
   function changeNextSlide() {
     setStateSlide((oldIndex) => {
-      if (oldIndex + 3 > maxSlide) {
+      if ((oldIndex + 5) > maxSlide) {
         return oldIndex;
       } else {
         return oldIndex + 1;
