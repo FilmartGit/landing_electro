@@ -5,7 +5,11 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const { name, phone, comments } = req.body;
     const response = await tgSender(name, phone, comments);
-    return res.status(200).json(response);
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(403).json(response);
+    }
   } else {
     return res
       .status(405)

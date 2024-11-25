@@ -18,11 +18,11 @@ export default function Modal({ stateModal, changeModal }) {
         body: DTOtransfer
       });
       console.log(res);
-      // if (res.status === 200) {
-      //   alert("Заявка успешно отправлена!");
-      // } else {
-      //   alert("Заявка не отправлена!");
-      // }
+      if (res.status === 200) {
+        alert("Заявка успешно отправлена!");
+      } else {
+        alert("Заявка не отправлена!");
+      }
     } catch (error) {
       return "error";
     }
