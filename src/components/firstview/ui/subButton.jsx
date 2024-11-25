@@ -15,7 +15,7 @@ export default function SubButton() {
         </p>
         <div className="px-9 flex items-center gap-[10px] relative">
           <Link
-            href="##"
+            href="https://wa.me/79515631812"
             onMouseEnter={() => setStateQRwh((oldState) => !oldState)}
             onMouseLeave={() => setStateQRwh((oldState) => !oldState)}
             target="_blank"
@@ -28,7 +28,7 @@ export default function SubButton() {
             />
           </Link>
           <Link
-            href="##"
+            href="https://t.me/+79515631812"
             target="_blank"
             onMouseEnter={() => setStateQRtg((oldState) => !oldState)}
             onMouseLeave={() => setStateQRtg((oldState) => !oldState)}
