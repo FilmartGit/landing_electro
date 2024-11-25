@@ -3,7 +3,10 @@ import axios from "axios";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { name, phone, comments } = req.body;
+    const data = JSON.parse(req.body);
+    const name = data.name;
+    const phone = data.tel;
+    const comments = data.comments;
     const response = await tgSender(name, phone, comments);
     if (response.success) {
       return res.status(200).json(response);

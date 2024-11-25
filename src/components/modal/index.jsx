@@ -15,7 +15,7 @@ export default function Modal({ stateModal, changeModal }) {
     try {
       const res = await fetch("/api/telegram", {
         method: 'POST',
-        body: DTOtransfer
+        body: JSON.stringify(DTOtransfer)
       });
       console.log(res);
       if (res.status === 200) {
@@ -33,7 +33,7 @@ export default function Modal({ stateModal, changeModal }) {
 
     const formData = new FormData(event.target);
     const res = await handleSubmit(formData);
-    alert(res);
+     console.log(res);
   }
 
   return (
