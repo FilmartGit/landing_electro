@@ -6,7 +6,7 @@ export default function FullModal({ title, body, stateModal, changeModal }) {
       <div className="w-1/3 bg-[#585858]">
         <div className="flex border-b border-dashed border-[#6d6d6d] box-border">
           <h3 className="text-slate-50 p-6">{title}</h3>
-          <button onClick={changeModal} className='ml-auto mr-5'>
+          <button onClick={()=>changeModal(oldState=>!oldState)} className='ml-auto mr-5'>
             <UIicons.closeModal className="text-[#d4d4d4]  w-8 h-8"/>
           </button>
         </div>
