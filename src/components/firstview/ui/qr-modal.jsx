@@ -16,6 +16,7 @@ export default function ModalQR({ type }) {
             ? "qr-tg.svg"
             : undefined
         }
+        alt='qr'
         width="150"
         height="150"
       />
