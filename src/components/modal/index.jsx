@@ -8,7 +8,7 @@ export default function Modal({ stateModal, changeModal }) {
     "use server";
     const DTOtransfer = {
       name: formData.get("name"),
-      phone: formData.get("phone"),
+      phone: formData.get("tel"),
       comments: formData.get("comment") || "Без комментария",
     };
 
@@ -17,11 +17,12 @@ export default function Modal({ stateModal, changeModal }) {
         method: 'POST',
         body: DTOtransfer
       });
-      if (res.status === 200) {
-        alert("Заявка успешно отправлена!");
-      } else {
-        alert("Заявка не отправлена!");
-      }
+      console.log(res);
+      // if (res.status === 200) {
+      //   alert("Заявка успешно отправлена!");
+      // } else {
+      //   alert("Заявка не отправлена!");
+      // }
     } catch (error) {
       return "error";
     }
@@ -76,7 +77,7 @@ export default function Modal({ stateModal, changeModal }) {
             <input
               id="formComment"
               type="text"
-              name="text"
+              name="comment"
               className="bg-[#D9D9D9] rounded-lg border-0 w-full mt-2 mb-5 p-5"
             />
             <p className="text-slate-50 text-lg font-normal">прикрепите файл</p>
