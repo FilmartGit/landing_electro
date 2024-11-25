@@ -29,6 +29,7 @@ import axios from "axios";
 // }
 
 export default function Modal({ stateModal, changeModal }) {
+  
   async function handleSubmit(formData) {
     "use server";
     const DTOtransfer = {
@@ -38,7 +39,10 @@ export default function Modal({ stateModal, changeModal }) {
     };
 
     try {
-      const res = await axios.post("/api/telegram", DTOtransfer);
+      const res = await fetch("/api/telegram", {
+        method: 'POST',
+        body: DTOtransfer
+      });
       if (res.status === 200) {
         alert("Заявка успешно отправлена!");
       } else {
@@ -49,8 +53,11 @@ export default function Modal({ stateModal, changeModal }) {
     }
   }
 
-  async function action(formData) {
-    const res = handleSubmit(formData);
+  async function action(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const res = await handleSubmit(formData);
     alert(res);
   }
 
@@ -58,7 +65,7 @@ export default function Modal({ stateModal, changeModal }) {
     <FullModal
       title="Получить КП"
       body={
-        <form action={action}>
+        <form onSubmit={action}>
           <div className="px-6 pb-5">
             <label
               htmlFor="formName"
