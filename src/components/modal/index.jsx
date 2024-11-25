@@ -9,7 +9,7 @@ export default function Modal({ stateModal, changeModal }) {
     const DTOtransfer = {
       name: formData.get("name"),
       phone: formData.get("phone"),
-      comment: formData.get("comment") || "Без комментария",
+      comments: formData.get("comment") || "Без комментария",
     };
 
     try {
