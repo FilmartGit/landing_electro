@@ -1,32 +1,6 @@
-import { ConfigServices } from "@/services/config";
 import UIbuttonSender from "../ui/button_sender";
 import { UIicons } from "../ui/icons";
 import FullModal from "../ui/modal-full";
-import { promises as fs } from "fs";
-import { Input } from "postcss";
-import FormBody from "../ui/form_body";
-import axios from "axios";
-
-// async function handleSubmit(formData) {
-//   "use server";
-
-//   console.log(formData);
-
-//   // const [API_URL] = ConfigServices.getENV();
-
-//   // const name = formData.get("name");
-//   // const phone = formData.get("phone");
-//   // const comment = formData.get("comment");
-//   // const file = formData.get("files");
-//   // const fileName = file.name;
-//   // const linkFileName = `${API_URL}${PATH_URL}/files/${fileName}`;
-
-//   // const buffer = await file.arrayBuffer();
-//   // const fileBuffer = Buffer.from(buffer);
-//   // console.log(fileName);
-//   // // await fs.writeFile(`${PATH_URL}/files/${fileName}`, fileBuffer);
-//   // await fs.writeFile(`${PATH_URL}/files/${fileName}`, fileBuffer);
-// }
 
 export default function Modal({ stateModal, changeModal }) {
   
