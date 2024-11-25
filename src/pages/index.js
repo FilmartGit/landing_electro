@@ -5,6 +5,7 @@ import FirstView from '@/components/firstview';
 import FormPage from '@/components/forms_page';
 import HeaderMenu from '@/components/header';
 import PageLayout from '@/components/layout/page';
+import Modal from '@/components/modal';
 import { useState } from 'react';
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <Advanced />
       <FormPage />
       <HeaderMenu />
+      <Modal stateModal={stateModal} changeModal={changeState} />
     </PageLayout>   
   );
 }
