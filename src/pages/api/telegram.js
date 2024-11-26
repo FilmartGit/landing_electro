@@ -1,5 +1,4 @@
 import { ConfigServices } from "@/services/config";
-import axios from "axios";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -28,19 +27,23 @@ async function tgSender(name, phone, comments) {
     Телефон: ${phone} \n
     Комментарий: ${comments}
   `;
-  const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${text}`;
 
   try {
     // Send the message via the Telegram Bot API
-    const response = await axios.get(telegramUrl);
-
-    if (response.data.ok) {
-      return { success: true, message: "Телеграм вернул положительный ответ!" };
-    } else {
-      return { success: false, message: "В заявке есть ошибочные данные." };
-    }
+    await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${text}`
+    )
+      .then((res) => {
+        return JSON.parse(res);
+      })
+      .then((data) => {
+        return { success: true, message: data };
+      })
+      .catch((error) => {
+        return { success: false, message: error };
+      });
   } catch (error) {
-    console.error("Error sending message to Telegram:", error);
+      console.error("Error sending message to Telegram:", error);
     return {
       success: false,
       message: "Что-то пошло не так, попробуйте позднее.",
