@@ -6,16 +6,11 @@ export default function Modal({ stateModal, changeModal }) {
   
   async function handleSubmit(formData) {
     "use server";
-    const DTOtransfer = {
-      name: formData.get("name"),
-      phone: formData.get("tel"),
-      comments: formData.get("comment") || "Без комментария",
-    };
-
+ 
     try {
       const res = await fetch("/api/telegram", {
         method: 'POST',
-        body: JSON.stringify(DTOtransfer)
+        body: formData
       });
       console.log(res);
       if (res.status === 200) {

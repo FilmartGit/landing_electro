@@ -3,15 +3,16 @@ import { ConfigServices } from "@/services/config";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const data = JSON.parse(req.body);
-    const name = data.name;
-    const phone = data.tel;
-    const comments = data.comments;
-    const response = await tgSender(name, phone, comments);
-    if (response.success) {
-      return res.status(200).json(response);
-    } else {
-      return res.status(403).json(response);
-    }
+    console.log(data);
+    // const name = data.name;
+    // const phone = data.tel;
+    // const comments = data.comments;
+    // const response = await tgSender(name, phone, comments);
+    // if (response.success) {
+    //   return res.status(200).json(response);
+    // } else {
+    //   return res.status(403).json(response);
+    // }
   } else {
     return res
       .status(405)
