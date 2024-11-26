@@ -1,3 +1,5 @@
+'use server';
+
 import { ConfigServices } from "@/services/config";
 
 export default async function handler(req, res) {
