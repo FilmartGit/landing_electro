@@ -2,8 +2,8 @@ import { useState } from "react";
 import UIbuttonSender from "../ui/button_sender";
 import { UIicons } from "../ui/icons";
 import FullModal from "../ui/modal-full";
-import SenderTelegram from "./model/send-message";
 import Loader from "./ui/loader";
+import { ConfigServices } from "@/services/config";
 
 export default function Modal({
   stateModal,
