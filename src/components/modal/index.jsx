@@ -18,7 +18,6 @@ export default function Modal({
     event.preventDefault();
     const formData = new FormData(event.target);
 
-    try {
       const result = await SenderTelegram(formData);
       const status = await result.ok;
       if (status) {
@@ -46,9 +45,7 @@ export default function Modal({
         });
         setStateModalNotification(true);
       }
-    } catch (error) {
-      console.log(error);
-    }
+
   }
 
   return (
