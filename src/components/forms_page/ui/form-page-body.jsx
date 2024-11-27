@@ -2,7 +2,7 @@ import Loader from "@/components/modal/ui/loader";
 import UIbuttonSender from "@/components/ui/button_sender";
 import { UIicons } from "@/components/ui/icons";
 import { ConfigServices } from "@/services/config";
-import axios from 'axios';
+import axios from "axios";
 import clsx from "clsx";
 import { useState } from "react";
 
@@ -26,14 +26,15 @@ export default function FormPageBody({
     const files = formData.get("file");
 
     // Локальная проверка формы на размер файла
-    if (files.size > 52000000){
-    setIsLoading(false);
+    if (files.size > 52000000) {
+      setIsLoading(false);
       setResultState((result) => {
         return {
           ...result,
           ok: "false",
           title: "Ошибка в файле",
-          description: "Размер файла превысил допустимые 50мб. Попробуйте отправить его нам в чат Telegram",
+          description:
+            "Размер файла превысил допустимые 50мб. Попробуйте отправить его нам в чат Telegram",
         };
       });
       setStateModalNotification(true);
@@ -47,7 +48,6 @@ export default function FormPageBody({
         Телефон: ${phone} \n
         Комментарий: ${comments || "без комментария"}
       `;
-
 
     // Отправка текстового сообщения
     await fetch(
@@ -69,44 +69,37 @@ export default function FormPageBody({
     )
       .then((response) => response.json())
       .then((data) => {
-
         // Если отправилось, отправляем следом файл
-        if( files.name ){
+        if (files.name) {
           const formDto = new FormData();
-          formDto.append('chat_id', TELEGRAM_CHAT_ID);
-          formDto.append('document', files);
+          formDto.append("chat_id", TELEGRAM_CHAT_ID);
+          formDto.append("document", files);
           console.log(formDto);
-          axios.post("https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendDocument", formDto, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            }
-          });
-
-          // fetch(
-          //   "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendDocument", formDto, 
-          //   {
-          //     method: "POST",
-          //     headers: {
-          //       "Content-Type": "multipart/form-data",
-          //       "Access-Control-Allow-Origin": "*",
-          //       "Access-Control-Allow-Methods": "GET, POST",
-          //       "Access-Control-Allow-Headers":
-          //         "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-          //     }
-          //   }
-          // ).then((data) => { 
-          //   setIsLoading(false);
-          //   setResultState((result) => {
-          //     return {
-          //       ...result,
-          //       ok: "true",
-          //       title: "Успешно",
-          //       description:
-          //         "Ваша заявка отправлена. Мы уже приступили к рассмотрению вашей заявки. Ожидайте звонка нашего специалиста.",
-          //     };
-          //   });
-          //   setStateModalNotification(true);
-          // });
+          axios
+            .post(
+              "https://api.telegram.org/bot" +
+                TELEGRAM_BOT_TOKEN +
+                "/sendDocument",
+              formDto,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              }
+            )
+            .then((el) => {
+              setIsLoading(false);
+              setResultState((result) => {
+                return {
+                  ...result,
+                  ok: "true",
+                  title: "Успешно",
+                  description:
+                    "Ваша заявка отправлена. Мы уже приступили к рассмотрению вашей заявки. Ожидайте звонка нашего специалиста.",
+                };
+              });
+              setStateModalNotification(true);
+            });
         } else {
           setIsLoading(false);
           setResultState((result) => {
@@ -212,7 +205,7 @@ export default function FormPageBody({
               name="file"
               className="hidden"
               onChange={handleFile}
-              accept=".pdf, image/* .doc,.docx, .xls, .xlsx, .xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              accept=".pdf, .doc, .docx, .xls, .xlsx, .xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             />
           </div>
         </div>
