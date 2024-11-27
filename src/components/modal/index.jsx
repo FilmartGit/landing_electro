@@ -118,7 +118,7 @@ export default function Modal({
               name="comment"
               className="bg-[#D9D9D9] rounded-lg border-0 w-full mt-2 mb-5 p-5"
             />
-            <p className="text-slate-50 text-lg font-normal">прикрепите файл</p>
+            <p className="text-slate-50 text-lg font-normal">прикрепите файл (не более 50 мб.)</p>
             <label
               htmlFor="formFile"
               className="bg-[#444444] rounded-lg border flex items-center justify-center w-full mt-2 p-5 border-dashed border-[#585858] cursor-pointer hover:bg-[#525252] transition-colors"
