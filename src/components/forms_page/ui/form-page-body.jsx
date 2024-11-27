@@ -2,6 +2,7 @@ import Loader from "@/components/modal/ui/loader";
 import UIbuttonSender from "@/components/ui/button_sender";
 import { UIicons } from "@/components/ui/icons";
 import { ConfigServices } from "@/services/config";
+import axios from 'axios';
 import clsx from "clsx";
 import { useState } from "react";
 
@@ -74,31 +75,38 @@ export default function FormPageBody({
           const formDto = new FormData();
           formDto.append('chat_id', TELEGRAM_CHAT_ID);
           formDto.append('document', files);
-          fetch(
-            "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendDocument", formDto, 
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "multipart/form-data",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST",
-                "Access-Control-Allow-Headers":
-                  "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-              }
+          console.log(formDto);
+          axios.post("https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendDocument", formDto, {
+            headers: {
+              "Content-Type": "multipart/form-data",
             }
-          ).then((data) => { 
-            setIsLoading(false);
-            setResultState((result) => {
-              return {
-                ...result,
-                ok: "true",
-                title: "Успешно",
-                description:
-                  "Ваша заявка отправлена. Мы уже приступили к рассмотрению вашей заявки. Ожидайте звонка нашего специалиста.",
-              };
-            });
-            setStateModalNotification(true);
           });
+
+          // fetch(
+          //   "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendDocument", formDto, 
+          //   {
+          //     method: "POST",
+          //     headers: {
+          //       "Content-Type": "multipart/form-data",
+          //       "Access-Control-Allow-Origin": "*",
+          //       "Access-Control-Allow-Methods": "GET, POST",
+          //       "Access-Control-Allow-Headers":
+          //         "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          //     }
+          //   }
+          // ).then((data) => { 
+          //   setIsLoading(false);
+          //   setResultState((result) => {
+          //     return {
+          //       ...result,
+          //       ok: "true",
+          //       title: "Успешно",
+          //       description:
+          //         "Ваша заявка отправлена. Мы уже приступили к рассмотрению вашей заявки. Ожидайте звонка нашего специалиста.",
+          //     };
+          //   });
+          //   setStateModalNotification(true);
+          // });
         } else {
           setIsLoading(false);
           setResultState((result) => {
