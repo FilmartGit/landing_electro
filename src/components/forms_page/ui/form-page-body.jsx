@@ -75,7 +75,7 @@ export default function FormPageBody({
           formDto.append('chat_id', TELEGRAM_CHAT_ID);
           formDto.append('document', files);
           fetch(
-            "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendDocument",
+            "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendDocument", formDto, 
             {
               method: "POST",
               headers: {
@@ -84,11 +84,9 @@ export default function FormPageBody({
                 "Access-Control-Allow-Methods": "GET, POST",
                 "Access-Control-Allow-Headers":
                   "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-              },
-              body: formDto
+              }
             }
-          ).then((response) => response.json())
-          .then((data) => { 
+          ).then((data) => { 
             setIsLoading(false);
             setResultState((result) => {
               return {
