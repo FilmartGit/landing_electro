@@ -1,5 +1,3 @@
-'use server';
-
 import { ConfigServices } from "@/services/config";
 //import TelegramBot from 'node-telegram-bot-api';
 
