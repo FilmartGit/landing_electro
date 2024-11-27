@@ -20,7 +20,8 @@ export default function Modal({
 
     try {
       const result = await SenderTelegram(formData);
-      if (result.ok) {
+      const status = await result.ok;
+      if (status) {
         setIsLoading(false);
         setResultState((result) => {
           return {
