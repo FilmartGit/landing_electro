@@ -7,10 +7,8 @@ export default function Modal({ stateModal, changeModal }) {
   
   async function action(event) {
     event.preventDefault();
-
     const formData = new FormData(event.target);
     await SenderTelegram(formData);
-
   }
 
   return (

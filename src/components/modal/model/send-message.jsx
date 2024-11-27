@@ -1,9 +1,9 @@
 'use server';
 
 import { ConfigServices } from "@/services/config";
-import TelegramBot from 'node-telegram-bot-api';
+//import TelegramBot from 'node-telegram-bot-api';
 
-export default function SenderTelegram( req ){
+export default async function SenderTelegram( req ){
     const data =  req.body;     
     const name = req.get("name");
     const phone = req.get("tel");
@@ -16,7 +16,16 @@ export default function SenderTelegram( req ){
       Комментарий: ${comments || "без комментария"}
     `;
 
-    const Bot = new TelegramBot(TELEGRAM_BOT_TOKEN);
-    Bot.sendMessage(TELEGRAM_CHAT_ID, text);
+    return {"text": text}
+
+    // const response = await fetch('', {
+    //     method: "post",
+    //     body: text,
+    // });
+
+
+
+    // const Bot = new TelegramBot(TELEGRAM_BOT_TOKEN);
+    // Bot.sendMessage(TELEGRAM_CHAT_ID, text);
     return res.status(200).json({ok: true, message: "Заявка успешно отправлена"});
 }
