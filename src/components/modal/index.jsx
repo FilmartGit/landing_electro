@@ -12,6 +12,10 @@ export default function Modal({
   setStateModalNotification,
 }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [fileState, setFileState] = useState({
+    ok: false,
+    name: ".jpg/png, .pdf, .docx, .xlsx",
+  });
 
   async function action(event) {
     setIsLoading(true);
@@ -20,6 +24,24 @@ export default function Modal({
     const name = formData.get("name");
     const phone = formData.get("tel");
     const comments = formData.get("comments");
+    const files = formData.get("file");
+
+// Локальная проверка формы на размер файла
+if (files.size > 52000000) {
+  setIsLoading(false);
+  setResultState((result) => {
+    return {
+      ...result,
+      ok: "false",
+      title: "Ошибка в файле",
+      description:
+        "Размер файла превысил допустимые 50мб. Попробуйте отправить его нам в чат Telegram",
+    };
+  });
+  setStateModalNotification(true);
+  return false;
+}
+
     const [TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID] = ConfigServices.getENV();
     const text = `
         Новая заявка с сайта:\n 
@@ -47,18 +69,50 @@ export default function Modal({
     )
       .then((response) => response.json())
       .then((data) => {
-        setIsLoading(false);
-        setResultState((result) => {
-          return {
-            ...result,
-            ok: "true",
-            title: "Успешно",
-            description:
-              "Ваша заявка отправлена и специалисты уже приступили к расчету.",
-          };
-        });
-        changeModal(false);
-        setStateModalNotification(true);
+        // Если отправилось, отправляем следом файл
+        if (files.name) {
+          const formDto = new FormData();
+          formDto.append("chat_id", TELEGRAM_CHAT_ID);
+          formDto.append("document", files);
+          console.log(formDto);
+          axios
+            .post(
+              "https://api.telegram.org/bot" +
+                TELEGRAM_BOT_TOKEN +
+                "/sendDocument",
+              formDto,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              }
+            )
+            .then((el) => {
+              setIsLoading(false);
+              setResultState((result) => {
+                return {
+                  ...result,
+                  ok: "true",
+                  title: "Успешно",
+                  description:
+                    "Ваша заявка отправлена. Мы уже приступили к рассмотрению вашей заявки. Ожидайте звонка нашего специалиста.",
+                };
+              });
+              setStateModalNotification(true);
+            });
+        } else {
+          setIsLoading(false);
+          setResultState((result) => {
+            return {
+              ...result,
+              ok: "true",
+              title: "Успешно",
+              description:
+                "Ваша заявка отправлена. Ожидайте звонка нашего специалиста.",
+            };
+          });
+          setStateModalNotification(true);
+        }
       })
       .catch((error) => {
         setIsLoading(false);
@@ -72,6 +126,16 @@ export default function Modal({
         });
         setStateModalNotification(true);
       });
+  }
+
+  function handleFile(event) {
+    setFileState((oldState) => {
+      return {
+        ...oldState,
+        ok: true,
+        name: event.target.computedName,
+      };
+    });
   }
 
   return (
@@ -118,15 +182,26 @@ export default function Modal({
               name="comment"
               className="bg-[#D9D9D9] rounded-lg border-0 w-full mt-2 mb-5 p-5"
             />
-            <p className="text-slate-50 text-lg font-normal">прикрепите файл (не более 50 мб.)</p>
+            <p className="text-slate-50 text-lg font-normal">
+              прикрепите файл (не более 50 мб.)
+              <br />
+              {fileState.name}
+            </p>
             <label
               htmlFor="formFile"
-              className="bg-[#444444] rounded-lg border flex items-center justify-center w-full mt-2 p-5 border-dashed border-[#585858] cursor-pointer hover:bg-[#525252] transition-colors"
+              className={clsx(
+                "rounded-lg border flex items-center justify-center w-full mt-2 p-5 border-dashed border-[#585858] cursor-pointer hover:bg-[#525252] transition-colors",
+                fileState.ok ? "bg-green-800" : "bg-[#444444]"
+              )}
             >
-              <UIicons.fileDownloading className="w-5 h-5 text-[#D9D9D9]" />
+              {fileState.ok ? (
+                <UIicons.ok className="w-7 h-7 text-slate-50" />
+              ) : (
+                <UIicons.fileDownloading className="w-7 h-7 text-[#D9D9D9]" />
+              )}
             </label>
 
-            <input id="formFile" type="file" name="files" className="hidden" />
+            <input id="formFile" type="file" name="files" className="hidden" onChange={handleFile}/>
           </div>
 
           <div className="border-t border-dashed border-[#6d6d6d] box-border mx-auto p-6">
