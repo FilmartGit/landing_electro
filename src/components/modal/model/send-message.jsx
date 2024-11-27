@@ -5,15 +5,15 @@ import TelegramBot from 'node-telegram-bot-api';
 
 export default function SenderTelegram( req ){
     const data =  req.body;     
-    const name = data.name;
-    const phone = data.tel;
-    const comments = data.comments;
+    const name = req.get("name");
+    const phone = req.get("tel");
+    const comments = req.get("comments");
     const [TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID] = ConfigServices.getENV();
     const text = `
       Новая заявка с сайта:\n 
       Имя: ${name} \n
       Телефон: ${phone} \n
-      Комментарий: ${comments}
+      Комментарий: ${comments || "без комментария"}
     `;
 
     const Bot = new TelegramBot(TELEGRAM_BOT_TOKEN);
