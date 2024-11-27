@@ -1,33 +1,15 @@
 import UIbuttonSender from "../ui/button_sender";
 import { UIicons } from "../ui/icons";
 import FullModal from "../ui/modal-full";
+import SenderTelegram from './model/send-message';
 
 export default function Modal({ stateModal, changeModal }) {
   
-  async function handleSubmit(formData) {
-    "use server";
- 
-    try {
-      const res = await fetch("/api/telegram", {
-        method: 'POST',
-        body: formData
-      });
-
-      if (res.ok) {
-        alert("Заявка успешно отправлена!");
-      } else {
-        alert("Заявка не отправлена!");
-      }
-    } catch (error) {
-      return "error";
-    }
-  }
-
   async function action(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    await handleSubmit(formData);
+    await SenderTelegram(formData);
 
   }
 
