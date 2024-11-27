@@ -2,7 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   publicRuntimeConfig: {
-    API_URL: process.env.API_URL,
     TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
     TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID,
   },
@@ -16,7 +15,7 @@ const nextConfig = {
           { key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin
           {
             key: "Access-Control-Allow-Methods",
-            value: "GET,DELETE,PATCH,POST,PUT",
+            value: "GET,POST",
           },
           {
             key: "Access-Control-Allow-Headers",
