@@ -71,6 +71,9 @@ export default function FormPageBody({
 
         // Если отправилось, отправляем следом файл
         if( files.name ){
+          const formDto = new FormData();
+          formDto.append('chat_id', TELEGRAM_CHAT_ID);
+          formDto.append('document', files);
           fetch(
             "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendDocument",
             {
@@ -82,10 +85,7 @@ export default function FormPageBody({
                 "Access-Control-Allow-Headers":
                   "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
               },
-              body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                document: files,
-              }),
+              body: formDto
             }
           ).then((response) => response.json())
           .then((data) => { 
