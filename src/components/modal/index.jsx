@@ -12,8 +12,8 @@ export default function Modal({ stateModal, changeModal }) {
         method: 'POST',
         body: formData
       });
-      console.log(res);
-      if (res.status === 200) {
+
+      if (res.ok) {
         alert("Заявка успешно отправлена!");
       } else {
         alert("Заявка не отправлена!");
@@ -27,8 +27,8 @@ export default function Modal({ stateModal, changeModal }) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const res = await handleSubmit(formData);
-     console.log(res);
+    await handleSubmit(formData);
+
   }
 
   return (
