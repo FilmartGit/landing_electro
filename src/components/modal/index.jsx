@@ -15,7 +15,7 @@ export default function Modal({ stateModal, changeModal }) {
     <FullModal
       title="Получить КП"
       body={
-        <form onSubmit={action}>
+        <form action={action}>
           <div className="px-6 pb-5">
             <label
               htmlFor="formName"

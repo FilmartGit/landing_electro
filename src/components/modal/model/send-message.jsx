@@ -14,16 +14,14 @@ export default async function SenderTelegram( req ){
       Комментарий: ${comments || "без комментария"}
     `;
 
-    return {"text": text}
+    alert(text);
 
     // const response = await fetch('', {
     //     method: "post",
     //     body: text,
     // });
 
-
-
     // const Bot = new TelegramBot(TELEGRAM_BOT_TOKEN);
     // Bot.sendMessage(TELEGRAM_CHAT_ID, text);
-    return res.status(200).json({ok: true, message: "Заявка успешно отправлена"});
+    // return res.status(200).json({ok: true, message: "Заявка успешно отправлена"});
 }
