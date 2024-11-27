@@ -19,9 +19,10 @@ export default async function SenderTelegram(req) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Methods': "GET, POST",
-        'Access-Control-Allow-Headers': "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST",
+        "Access-Control-Allow-Headers":
+          "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
       },
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
@@ -31,31 +32,9 @@ export default async function SenderTelegram(req) {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log("Message sent successfully:", data);
+      return { ok: true, message: "Форма успешно отправлена!" };
     })
     .catch((error) => {
-      console.error("Error sending message:", error);
+      return { ok: false, message: "Ошибка в отправке формы, попробуйте позднее", error: error };
     });
-
-  // fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       chat_id: TELEGRAM_CHAT_ID,
-  //       text
-  //     })
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     console.log('Message sent successfully:', data);
-  //   })
-  //   .catch(error => {
-  //     console.error('Error sending message:', error);
-  //   });
-
-  // const Bot = new TelegramBot(TELEGRAM_BOT_TOKEN);
-  // Bot.sendMessage(TELEGRAM_CHAT_ID, text);
-  // return res.status(200).json({ok: true, message: "Заявка успешно отправлена"});
 }

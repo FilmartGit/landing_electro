@@ -1,14 +1,63 @@
+import { useState } from "react";
 import UIbuttonSender from "../ui/button_sender";
 import { UIicons } from "../ui/icons";
 import FullModal from "../ui/modal-full";
-import SenderTelegram from './model/send-message';
+import SenderTelegram from "./model/send-message";
+import Loader from "./ui/loader";
 
-export default function Modal({ stateModal, changeModal }) {
-  
+export default function Modal({
+  stateModal,
+  changeModal,
+  setResultState,
+  setStateModalNotification,
+}) {
+  const [isLoading, setIsLoading] = useState(false);
+
   async function action(event) {
+    setIsLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
-    await SenderTelegram(formData);
+
+    try {
+      const result = await SenderTelegram(formData);
+      if (result.ok) {
+        setIsLoading(false);
+        setResultState((result) => {
+          return {
+            ...result,
+            ok: "true",
+            title: "Успешно",
+            description:
+              "Ваша заявка отправлена и специалисты уже приступили к расчету.",
+          };
+        });
+        changeModal(false);
+        setStateModalNotification(true);
+      } else {
+        setIsLoading(false);
+        setResultState((result) => {
+          return {
+            ...result,
+            ok: "false",
+            title: "Ошибка",
+            description: result.message,
+          };
+        });
+        setStateModalNotification(true);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      setResultState((result) => {
+        return {
+          ...result,
+          ok: false,
+          title: "Ошибка",
+          description:
+            "Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте еще раз.",
+        };
+      });
+      setStateModalNotification(true);
+    }
   }
 
   return (
@@ -68,7 +117,7 @@ export default function Modal({ stateModal, changeModal }) {
 
           <div className="border-t border-dashed border-[#6d6d6d] box-border mx-auto p-6">
             <UIbuttonSender
-              title="ОТПРАВИТЬ"
+              title={isLoading ? <Loader /> : "ОТПРАВИТЬ"}
               type="submit"
               handleClick={() => {}}
               className="w-full"
