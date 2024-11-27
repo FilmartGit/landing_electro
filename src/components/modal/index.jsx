@@ -18,31 +18,35 @@ export default function Modal({
     event.preventDefault();
     const formData = new FormData(event.target);
 
-    const result = await SenderTelegram(formData);
-    if (result.ok) {
-      setIsLoading(false);
-      setResultState((result) => {
-        return {
-          ...result,
-          ok: "true",
-          title: "Успешно",
-          description:
-            "Ваша заявка отправлена и специалисты уже приступили к расчету.",
-        };
-      });
-      changeModal(false);
-      setStateModalNotification(true);
-    } else {
-      setIsLoading(false);
-      setResultState((result) => {
-        return {
-          ...result,
-          ok: "false",
-          title: "Ошибка",
-          description: result.message,
-        };
-      });
-      setStateModalNotification(true);
+    try {
+      const result = await SenderTelegram(formData);
+      if (result.ok) {
+        setIsLoading(false);
+        setResultState((result) => {
+          return {
+            ...result,
+            ok: "true",
+            title: "Успешно",
+            description:
+              "Ваша заявка отправлена и специалисты уже приступили к расчету.",
+          };
+        });
+        changeModal(false);
+        setStateModalNotification(true);
+      } else {
+        setIsLoading(false);
+        setResultState((result) => {
+          return {
+            ...result,
+            ok: "false",
+            title: "Ошибка",
+            description: result.message,
+          };
+        });
+        setStateModalNotification(true);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
