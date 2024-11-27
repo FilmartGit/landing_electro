@@ -14,8 +14,7 @@ export default function Home() {
   const [stateModalNotification, setStateModalNotification] = useState(false);
   const [resultState, setResultState] = useState({
     title: "Уведомление",
-    description:
-      "Системное уведомление VDS.",
+    description: "Системное уведомление VDS.",
     ok: false,
   });
 
@@ -26,7 +25,10 @@ export default function Home() {
       <Cataloge changeModal={changeState} />
       <Brands />
       <Advanced />
-      <FormPage />
+      <FormPage
+        setResultState={setResultState}
+        setStateModalNotification={setStateModalNotification}
+      />
       <HeaderMenu />
       <Modal
         stateModal={stateModal}
