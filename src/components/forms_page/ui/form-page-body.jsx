@@ -5,6 +5,7 @@ import { ConfigServices } from "@/services/config";
 import axios from "axios";
 import clsx from "clsx";
 import { useState } from "react";
+// todo: Рефакторинг
 
 export default function FormPageBody({
   setResultState,
