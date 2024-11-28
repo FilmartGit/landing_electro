@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [stateModal, changeState] = useState(false);
-  const [stateModalNotification, setStateModalNotification] = useState(true);
+  const [stateModalNotification, setStateModalNotification] = useState(false);
   const [resultState, setResultState] = useState({
     title: "Уведомление",
     description: "Системное уведомление VDS.",
@@ -44,4 +44,3 @@ export default function Home() {
     </PageLayout>
   );
 }
-// Осталось потом модалочки подключить
