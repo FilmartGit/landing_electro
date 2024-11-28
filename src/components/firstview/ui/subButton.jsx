@@ -9,7 +9,7 @@ export default function SubButton() {
 
   return (
     <>
-      <div className="flex border border-dotted border-[#585858] w-1/2 mx-auto">
+      <div className="flex border border-dotted border-[#585858] lg:w-1/2 sm:w-3/4 mx-auto">
         <p className="p-6 block border-r border-dotted border-[#585858] text-slate-50 ">
           Где вам удобно получить расчет?
         </p>
@@ -45,7 +45,7 @@ export default function SubButton() {
           </Link>
         </div>
       </div>
-      <div className="flex border-l border-r pb-9 border-dotted border-[#585858] w-1/2 mx-auto"></div>
+      <div className="flex border-l border-r pb-9 border-dotted border-[#585858] lg:w-1/2 sm:w-3/4 mx-auto"></div>
     </>
   );
 }

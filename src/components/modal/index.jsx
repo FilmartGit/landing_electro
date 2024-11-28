@@ -4,6 +4,7 @@ import { UIicons } from "../ui/icons";
 import FullModal from "../ui/modal-full";
 import Loader from "./ui/loader";
 import { ConfigServices } from "@/services/config";
+import clsx from 'clsx';
 
 export default function Modal({
   stateModal,

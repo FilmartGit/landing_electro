@@ -142,7 +142,7 @@ export default function FormPageBody({
     <>
       <form onSubmit={handleSubmit}>
         <div className="border-b border-dotted border-[#585858] box-border">
-          <div className="pt-10 w-1/2 border-l border-r border-dotted border-[#585858] box-border mx-auto px-6  pb-5">
+          <div className="pt-10 lg:w-1/2 sm:w-3/4 border-l border-r border-dotted border-[#585858] box-border mx-auto px-6  pb-5">
             <label
               htmlFor="formName"
               className="text-slate-50 text-lg font-normal"
@@ -209,7 +209,7 @@ export default function FormPageBody({
             />
           </div>
         </div>
-        <div className="w-1/2 border-l border-r border-dotted border-[#585858] box-border mx-auto p-6 pb-24">
+        <div className="lg:w-1/2 sm:w-3/4 border-l border-r border-dotted border-[#585858] box-border mx-auto p-6 pb-24">
           <UIbuttonSender
             title={isLoading ? <Loader /> : "ОТПРАВИТЬ"}
             type="submit"

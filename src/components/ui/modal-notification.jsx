@@ -7,8 +7,8 @@ export default function ModalNotification({
 }) {
   return stateModal ? (
     <div className="fixed top-6 w-full z-[60]">
-      <div className="flex w-full items-center justify-center box-border">
-        <div className="text-slate-50 bg-[#585858] flex gap-5 w-fit items-center pr-5">
+      <div className="flex sm:w-full w-3/4 mx-auto items-center justify-center box-border ">
+        <div className="text-slate-50 bg-[#585858] flex gap-5 w-fit items-center pr-5 shadow-lg shadow-zinc-900">
           <div className='pl-5'>
             { result.ok ? <UIicons.ok className="text-green-500 w-10 h-10"/> : <UIicons.error className="text-rose-500 w-10 h-10"/>}
           </div>
