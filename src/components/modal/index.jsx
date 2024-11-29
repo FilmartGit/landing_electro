@@ -27,7 +27,7 @@ export default function Modal({
     const name = formData.get("nameModal");
     const phone = formData.get("telModal");
     const comments = formData.get("commentsModal");
-    const files = formData.get("fileModal");
+    const files = formData.get("filesModal");
 
     // Локальная проверка формы на размер файла
     if (files.size > 52000000) {
