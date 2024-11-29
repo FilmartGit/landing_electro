@@ -6,8 +6,17 @@ import Loader from "./ui/loader";
 import { ConfigServices } from "@/services/config";
 import clsx from 'clsx';
 import axios from 'axios';
-// todo: Рефакторинг
 
+/**
+ * Компонент модального окна
+ * 
+ * @param {boolean} stateModal - состояние модального окна
+ * @param {function} changeModal - функция изменения состояния модального окна
+ * @param {function} setResultState - функция изменения состояния результата в окне уведомления
+ * @param {function} setStateModalNotification - функция изменения состояния модального окна с уведомлением
+ * 
+ * @returns {JSX.Element}
+ */
 export default function Modal({
   stateModal,
   changeModal,
@@ -180,7 +189,7 @@ export default function Modal({
             <input
               id="formCommentModal"
               type="text"
-              name="commentModal"
+              name="commentsModal"
               className="bg-[#D9D9D9] rounded-lg border-0 w-full mt-2 mb-5 p-5"
             />
             <p className="text-slate-50 text-lg font-normal">
