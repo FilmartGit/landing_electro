@@ -122,6 +122,7 @@ export default function Modal({
             };
           });
           setStateModalNotification(true);
+          changeModal(false);
         }
       })
       .catch((error) => {
