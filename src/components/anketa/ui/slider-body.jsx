@@ -33,7 +33,7 @@ export default function SliderBody({
     }
   }
 
-    // Функция передачи данных в сервис отправки анкеты
+  // Функция передачи данных в сервис отправки анкеты
   async function sendAnketaForm(e) {
     e.preventDefault();
     setIsLoading(true);
@@ -45,7 +45,7 @@ export default function SliderBody({
     if (response.ok) {
       setIsLoading(false);
 
-// Вывести благодарственное окно
+      // Вывести благодарственное окно
       setResultState((result) => {
         return {
           ...result,
@@ -76,8 +76,11 @@ export default function SliderBody({
 
   return !finish ? (
     <>
-      <div className="text-slate-50 text-center text-lg font-bold w-full lg:w-1/2 sm:w-3/4 mx-auto leading-5 mt-5 py-5">
-        {dataQuestion[counterSlide].question}
+      <div className="text-slate-50 text-center text-lg font-bold w-full lg:w-1/2 sm:w-3/4 mx-auto leading-5 mt-5 py-5 flex flex-col gap-5">
+        <p>{dataQuestion[counterSlide].question}</p>
+        <div className="text-sm text-black md:hidden p-1 rounded-lg w-fit mx-auto bg-white px-5">
+          {counterSlide + 1} из {dataQuestion.length}
+        </div>
       </div>
       <div className="flex flex-col mt-5 gap-2">
         {dataQuestion[counterSlide].answer.map((answer, index) => (

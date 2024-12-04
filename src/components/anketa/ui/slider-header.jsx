@@ -36,7 +36,7 @@ export default function SliderHeader({
           >
             <Image src={"back.svg"} alt="" width="20" height="20" />
           </button>
-          <p className="text-slate-50">
+          <p className="text-slate-50 hidden md:block ">
             {counterSlide + 1} из {maxCountSlide}
           </p>
         </div>

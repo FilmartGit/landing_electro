@@ -1,16 +1,17 @@
 'use server';
+import { ConfigServices } from "@/services/config";
 
 export default async function sendAnketaOfTelegram(data, name, phone) {
 
-
-    const contact = `Имя: ${name}\nТелефон: ${phone}\n`;
+    const [TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID] = ConfigServices.getENV();
+    const contact = `Имя: ${name}\nТелефон: ${phone}\n\n`;
 
     let question = "";
-    data.map((item) => (question += `Вопрос:${item.question}\nОтвет:${item.answer}\n`));
+    data.map((item) => (question += `Вопрос:${item.question}\nОтвет:${item.answer}\n\n`));
 
-    let text = `Новая заявка\n${contact}${question}`;
+    let text = `Новая заявка\n${contact}${question}\n`;
 
-    const response = await fetch("https://api.telegram.org/bot7234405382:AAHsY0P2-qjc4echcqBUS8eXKxuTzxLp4Sg/sendMessage", {
+    const response = await fetch("https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -20,7 +21,7 @@ export default async function sendAnketaOfTelegram(data, name, phone) {
               "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
           },
         body: JSON.stringify({
-            chat_id: '-1002185777557',
+            chat_id: TELEGRAM_CHAT_ID,
             text,
         }),
     });
