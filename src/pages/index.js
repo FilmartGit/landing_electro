@@ -1,4 +1,5 @@
 import Advanced from "@/components/advanced";
+import Anketa from '@/components/anketa';
 import Brands from "@/components/brands";
 import Cataloge from "@/components/cataloge";
 import FirstView from "@/components/firstview";
@@ -23,6 +24,10 @@ export default function Home() {
       <HeaderMenu />
       <FirstView changeModal={changeState} />
       <Cataloge changeModal={changeState} />
+      <Anketa 
+        setResultState={setResultState}
+        setStateModalNotification={setStateModalNotification}
+      />
       <Brands />
       <Advanced />
       <FormPage
