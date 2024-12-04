@@ -22,6 +22,7 @@ export default function Slider({ setResultState, setStateModalNotification }) {
         changePrevSlide={changePrevSlide}
         dataAnswer={dataAnswer}
         dataQuestion={dataQuestion}
+        setFinish={setFinish}
       />
 
       <SliderBody

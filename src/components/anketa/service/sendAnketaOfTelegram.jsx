@@ -1,6 +1,15 @@
 'use server';
 
-export default async function sendAnketaOfTelegram({data}) {
+export default async function sendAnketaOfTelegram(data, name, phone) {
+
+
+    const contact = `Имя: ${name}\nТелефон: ${phone}\n`;
+
+    let question = "";
+    data.map((item) => (question += `Вопрос:${item.question}\nОтвет:${item.answer}\n`));
+
+    let text = `Новая заявка\n${contact}${question}`;
+
     const response = await fetch("https://api.telegram.org/bot7234405382:AAHsY0P2-qjc4echcqBUS8eXKxuTzxLp4Sg/sendMessage", {
         method: "POST",
         headers: {
@@ -12,7 +21,7 @@ export default async function sendAnketaOfTelegram({data}) {
           },
         body: JSON.stringify({
             chat_id: '-1002185777557',
-            text: data,
+            text,
         }),
     });
     return response;

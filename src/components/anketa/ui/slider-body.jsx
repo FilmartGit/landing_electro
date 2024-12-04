@@ -41,12 +41,7 @@ export default function SliderBody({
     const name = formContact.get("anketa_name");
     const phone = formContact.get("anketa_phone");
 
-    changeDataAnswer({
-      Имя: name,
-      Телефон: phone,
-    });
-
-    const response = await sendAnketaOfTelegram(dataAnswer);
+    const response = await sendAnketaOfTelegram(dataAnswer, name, phone);
     if (response.ok) {
       setIsLoading(false);
 
