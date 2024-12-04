@@ -21,5 +21,7 @@ export default function useStateRules(maxCountSlide) {
     }
   }
 
-  return [counterSlide, changeNextSlide, changePrevSlide];
+  const resetCounter = () => setCounterSlide(0);
+
+  return [counterSlide, changeNextSlide, changePrevSlide, resetCounter];
 }

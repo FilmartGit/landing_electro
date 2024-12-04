@@ -11,6 +11,8 @@ export default function SliderBody({
   changeNextSlide,
   setFinish,
   finish,
+  resetDataAnswer,
+  resetCounter,
   setResultState,
   setStateModalNotification,
 }) {
@@ -59,6 +61,9 @@ export default function SliderBody({
         };
       });
       setStateModalNotification(true);
+      setFinish(false);
+      resetDataAnswer();
+      resetCounter();
     } else {
       setIsLoading(false);
       setResultState((result) => {

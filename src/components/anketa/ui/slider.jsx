@@ -6,14 +6,15 @@ import SliderHeader from "./slider-header";
 import useDataAnswer from "../model/useDataAnswer";
 
 export default function Slider({ setResultState, setStateModalNotification }) {
-  const [dataAnswer, changeDataAnswer] = useDataAnswer();
+  const [dataAnswer, changeDataAnswer, resetDataAnswer] = useDataAnswer();
   const [finish, setFinish] = useState(false);
-  const [counterSlide, changeNextSlide, changePrevSlide] = useStateRules(
+  const [counterSlide, changeNextSlide, changePrevSlide, resetCounter] = useStateRules(
     dataQuestion.length
   );
 
   return (
     <div className="lg:h-fit md:min-h-96">
+      
       <SliderHeader
         counterSlide={counterSlide}
         maxCountSlide={dataQuestion.length}
@@ -33,7 +34,10 @@ export default function Slider({ setResultState, setStateModalNotification }) {
         setFinish={setFinish}
         setResultState={setResultState}
         setStateModalNotification={setStateModalNotification}
+        resetDataAnswer={resetDataAnswer}
+        resetCounter={resetCounter}
       />
+
     </div>
   );
 }

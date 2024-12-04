@@ -4,9 +4,12 @@ export default function useDataAnswer() {
   const [dataAnswer, setDataAnswer] = useState([]);
   const changeDataAnswer = (newDataAnswer) =>
     setDataAnswer((oldDataAnswer) => {
-      oldDataAnswer = oldDataAnswer.filter((item) => item.question !== newDataAnswer.question);
-      return [...oldDataAnswer, {...newDataAnswer}];
+      oldDataAnswer = oldDataAnswer.filter(
+        (item) => item.question !== newDataAnswer.question
+      );
+      return [...oldDataAnswer, { ...newDataAnswer }];
     });
-  console.log(dataAnswer);
-  return [dataAnswer, changeDataAnswer];
+  const resetDataAnswer = () => setDataAnswer([]);
+
+  return [dataAnswer, changeDataAnswer, resetDataAnswer];
 }
